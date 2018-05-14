@@ -47,7 +47,7 @@ class ApiHandler extends Handler
             'error_code' => $this->error_code,
             'request_url' => request()->path()
         ];
-        return $result;
+        return json_encode($result);
     }
 
 

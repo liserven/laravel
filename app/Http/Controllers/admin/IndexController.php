@@ -9,11 +9,12 @@
 namespace App\Http\Controllers\admin;
 
 
-use App\Http\Model\UserDataModel;
-use \Illuminate\Routing\Controller;
+use App\Notifications\InvoicePaid;
+use Illuminate\Notifications\Notifiable;
 
 class IndexController extends BaseController
 {
+    use Notifiable;
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class IndexController extends BaseController
     }
 
     public function index(){
+
         $actions = $this->getAction();
         return view('admin.index.index', [
             'menu'=> $actions

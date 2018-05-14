@@ -27,13 +27,13 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">名称：</label>
+                <label class="layui-form-label">url：</label>
                 <div class="layui-col-md3">
                     <input type="text" name="url" lay-verify="required" placeholder="请输入标题" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">url：</label>
+                <label class="layui-form-label">上级行为：</label>
                 <div class="layui-input-inline">
                     <select name="pid" lay-verify="" lay-filter="province">
                         <option value="0">一级行为</option>

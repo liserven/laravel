@@ -51,15 +51,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if( $exception instanceof BaseException)
-        {
-            return [
-                'data'=> 11
-            ];
-        }else{
             return parent::render($request, $exception);
-
-        }
     }
     protected function unauthenticated($request, AuthenticationException $exception)
     {

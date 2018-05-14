@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class ActionController extends BaseController
 {
-    public function toList()
+    public function toList(Request $request)
     {
         $page = ActionDataModel::getPage();
         return view('admin.action.tolist', [ 'page'=> $page]);
