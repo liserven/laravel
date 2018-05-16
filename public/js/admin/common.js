@@ -320,18 +320,20 @@ layui.define(['form', 'layer','laydate','upload'], function (exports) {
             callback : 回调方法
          */
         dMsg : function(options, isParents, time, callback){
+
+            options = eval("("+options+")");
             //1为刷新本页面 2为刷新父级页面
             var parentsResearch = isParents == 1 ? isParents : 2;
             var default_option = {
                 msg : 'error',
                 bol : false,
             };
-            $.extend(default_option, options);
+            default_option = $.extend(default_option, options);
+
             default_option.typeObj = {
-                icon : default_option.bol === true ? 1 : 2,
+                icon : default_option.bol ? 1 : 2,
                 time : time? time : 2000,
             };
-
             var dialog = layer.msg(default_option.msg, default_option.typeObj);
             if( default_option.bol === true )
             {

@@ -136,6 +136,13 @@
                     </td>
                     <td>
                         <div class="layui-table-cell">
+                            @if( $vo['status'] ==  1 )
+                                <a class="layui-btn layui-btn-primary layui-btn-xs edit"><i class="fa fa-edit"></i> 停用</a>
+
+                            @else
+                                <a class="layui-btn layui-btn-primary layui-btn-xs edit"><i class="fa fa-edit"></i> 启用</a>
+
+                            @endif
                             <a class="layui-btn layui-btn-primary layui-btn-xs edit"><i class="fa fa-edit"></i> 编辑</a>
                             <a class="layui-btn layui-btn-danger layui-btn-xs do_del"><i class="fa fa-times-circle-o"></i> 删除</a>
 
@@ -146,7 +153,9 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="13">{{$page->links()}}</td>
+                <td colspan="13">
+                        {{$page->links()}}
+                </td>
             </tr>
             </tfoot>
         </table>

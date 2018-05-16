@@ -19,11 +19,10 @@ class ActionData extends Migration
             $table->string('ad_url', 100)->comment('行为url');
             $table->integer('ad_pid')->comment('父id');
             $table->integer('order')->default(99);
-            $table->integer('create_at');
-            $table->integer('update_at');
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
+            $table->timestamps();
             $table->collation = 'utf8_unicode_ci';
         });
     }

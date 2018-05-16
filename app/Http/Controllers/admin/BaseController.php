@@ -36,5 +36,25 @@ class BaseController extends Controller
         return $actions;
     }
 
+    protected function resultHandles($result, $errCode = 90004)
+    {
+        if( !empty($result) ){
+            return show(true, 'ok');
+        }
+        else{
+            return show(false, 'err', [], $errCode);
+        }
+    }
+    protected function resultHandler( $msg= '操作成功', $bool= true, $data= [], $code= 200)
+    {
+        $data = [
+            'bol'=> $bool,
+            'msg'=> $msg,
+            'data'=> $data,
+            'err_code'=> $code
+        ];
+        return json_encode($data);
+    }
+
 
 }

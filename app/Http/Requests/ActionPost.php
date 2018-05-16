@@ -24,14 +24,14 @@ class ActionPost extends FormRequest
     public function rules()
     {
         return [
-            'ad_name'=> 'bail|required|max:6'
+            'name'=> 'bail|required|max:6'
         ];
     }
 
     public function messages()
     {
         return [
-            'ad_name.max'=> '名称不能太长'
+            'name.max'=> '名称不能太长'
         ];
     }
 }

@@ -9,9 +9,9 @@
 namespace App\Http\Controllers\admin;
 
 
-use App\Exceptions\ActionException;
 use App\Http\Model\ActionDataModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActionController extends BaseController
 {
@@ -25,7 +25,17 @@ class ActionController extends BaseController
     {
         if($request->isMethod('post'))
         {
-            throw new ActionException();
+            $model = new ActionDataModel();
+            $model->ad_url = $request->url;
+            $model->ad_name = $request->name;
+            $model->ad_pid = $request->pid;
+            if( $model->save())
+            {
+                return $this->resultHandler();
+            }
+            else{
+                return $this->resultHandler('操作失败', false);
+            }
         }else{
             $action = ActionDataModel::where([ 'ad_pid'=> 0])->get();
             return view('admin.action.doadd')->with('action', $action);

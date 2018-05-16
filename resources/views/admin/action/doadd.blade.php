@@ -9,27 +9,20 @@
 
 @extends('admin.layout.frame')
 @section('content')
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
     <div class='layui-row' style="padding: 20px;">
         <form class="layui-form" method="post" enctype="multipart/form-data">
+            {{csrf_field()}}
             <div class="layui-form-item">
                 <label class="layui-form-label">名称：</label>
                 <div class="layui-col-md3">
-                    <input type="text" name="ad_name" lay-verify="required" placeholder="行为名称" class="layui-input">
+                    <input type="text" name="name" lay-verify="required" placeholder="行为名称" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">url：</label>
                 <div class="layui-col-md3">
-                    <input type="text" name="url" lay-verify="required" placeholder="请输入标题" class="layui-input">
+                    <input type="text" name="url" lay-verify="required" placeholder="行为链接" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">

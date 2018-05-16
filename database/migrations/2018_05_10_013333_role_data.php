@@ -18,8 +18,8 @@ class RoleData extends Migration
             $table->string('role_name', 50)->comment('角色名称');
             $table->string('role_logo', 200)->comment('角色图片');
             $table->integer('order')->default(99);
-            $table->integer('create_at');
-            $table->integer('update_at');
+            $table->timestamps();
+
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

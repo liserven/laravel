@@ -18,8 +18,8 @@ class Role extends Migration
             $table->integer('member_id')->comment('管理员id');
             $table->integer('role_id')->comment('角色id');
             $table->integer('order')->default(99);
-            $table->integer('create_at');
-            $table->integer('update_at');
+            $table->timestamps();
+
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
