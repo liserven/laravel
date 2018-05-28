@@ -32,6 +32,23 @@ Route::get('admin/action/tolist', 'admin\ActionController@toList');
 Route::any('admin/action/doAdd', 'admin\ActionController@doAdd');
 Route::get('admin/action/doEdit', 'admin\ActionController@doEdit');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//所有需要验证id的控制器
+//Route::group(['middleware'=> ['IdMust'] ], function (){
+//    //行为删除
+//    Route::post('/admin/action/doDel', 'admin\ActionController@doDel');
+//});
+
+
+Route::post('/home', 'HomeController@index')->name('home');
+
+//管理员列表
+Route::get('demo', 'admin\MemberController@demo');
+
+
+Route::group(['middleware'=> ['demo'] ], function (){
+
+    Route::get('demo1', 'admin\MemberController@demo1');
+    Route::get('demo2', 'admin\MemberController@demo2');
+} );
+

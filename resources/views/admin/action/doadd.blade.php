@@ -16,13 +16,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">名称：</label>
                 <div class="layui-col-md3">
-                    <input type="text" name="name" lay-verify="required" placeholder="行为名称" class="layui-input">
+                    <input type="text" name="name"  placeholder="行为名称" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">url：</label>
                 <div class="layui-col-md3">
-                    <input type="text" name="url" lay-verify="required" placeholder="行为链接" class="layui-input">
+                    <input type="text" name="url"  placeholder="行为链接" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">

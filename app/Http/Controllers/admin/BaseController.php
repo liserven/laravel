@@ -11,8 +11,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\ActionDataModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \Illuminate\Support\Facades\View;
 
 class BaseController extends Controller
 {
@@ -38,11 +38,11 @@ class BaseController extends Controller
 
     protected function resultHandles($result, $errCode = 90004)
     {
-        if( !empty($result) ){
-            return show(true, 'ok');
+        if( $result ){
+            return $this->resultHandler();
         }
         else{
-            return show(false, 'err', [], $errCode);
+            return $this->resultHandler('操作失败', false);
         }
     }
     protected function resultHandler( $msg= '操作成功', $bool= true, $data= [], $code= 200)
@@ -53,8 +53,11 @@ class BaseController extends Controller
             'data'=> $data,
             'err_code'=> $code
         ];
-        return json_encode($data);
+        return response()->json($data);
     }
+
+
+
 
 
 }

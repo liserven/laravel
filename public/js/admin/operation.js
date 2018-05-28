@@ -1,4 +1,4 @@
-/*各种操作js*/
+
 
 layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
     var $ = layui.jquery
@@ -43,13 +43,25 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
 
     //一条数据删除
     $(".do_del").click(function () {
-        var url = 'doDel';
+        var url = $("#del_url").val();
         var id = $(this).parents('.tbody_content').attr('data-id');
+        var module = $(this).parents('.tbody_content').attr('module');
         layer.confirm('确定要删除么？', {
             btn: ['立即执行','再想想'] //按钮
         }, function(){
-            $.post(url,{id:id},function (result) {
-                common.dMsg(result,1);
+
+            $.post(url,{id:id, module:module},function (result) {
+                if( result.bol )
+                {
+                    layer.msg(result.msg, {icon:1, time:2000});
+
+                    setTimeout(function () {
+
+                        window.location.reload();
+                    }, 2000);
+                }else{
+                    layer.msg(result.msg, {icon:2, time:2000});
+                }
             });
         });
     });
@@ -83,11 +95,16 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
                 btn: ['立即执行','再想想'] //按钮
             }, function(){
                 $.post(url,{ids:ids},function (result) {
-                    if( result.bol ){
-                        layer.msg(result.msg,{icon:1,time:2000});
-                        window.location.reload();
+                    if( result.bol )
+                    {
+                        layer.msg(result.msg, {icon:1, time:2000});
+
+                        setTimeout(function () {
+
+                            window.parent.location.reload();
+                        }, 2000);
                     }else{
-                        layer.msg(result.msg,{icon:2,time:2000});
+                        layer.msg(result.msg, {icon:2, time:2000});
                     }
                 });
             });
@@ -144,7 +161,17 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
     //监听提交
     form.on('submit(formDemo)', function(data){
         $.post('doAdd', data.field, function (result) {
-            common.dMsg(result);
+            if( result.bol )
+            {
+                layer.msg(result.msg, {icon:1, time:2000});
+
+                setTimeout(function () {
+
+                        window.parent.location.reload();
+                }, 2000);
+            }else{
+                layer.msg(result.msg, {icon:2, time:2000});
+            }
         });
         return false;
     });

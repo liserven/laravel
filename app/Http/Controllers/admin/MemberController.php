@@ -43,4 +43,20 @@ class MemberController extends BaseController
     }
 
 
+    public function demo()
+    {
+        return '1';
+    }
+
+    public function dem1()
+    {
+        return 2;
+    }
+
+    public function dem2()
+    {
+        return 3;
+    }
+
+
 }

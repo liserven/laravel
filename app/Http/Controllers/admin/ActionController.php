@@ -10,6 +10,7 @@ namespace App\Http\Controllers\admin;
 
 
 use App\Http\Model\ActionDataModel;
+use App\Validate\ActionValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,7 @@ class ActionController extends BaseController
     {
         if($request->isMethod('post'))
         {
+            (new ActionValidate())->goCheck();
             $model = new ActionDataModel();
             $model->ad_url = $request->url;
             $model->ad_name = $request->name;
@@ -46,5 +48,14 @@ class ActionController extends BaseController
     {
         $page = ActionDataModel::getPage();
         return view('admin.action.tolist', [ 'page'=> $page]);
+
     }
+
+//公共的删除方法  如果不需要可在子类中继承重写
+    public function doDel(Request $request)
+    {
+        $result = DB::table('action_data')->where(['ad_id'=> $request->id])->delete();
+        return  $this->resultHandles($result);
+    }
+
 }

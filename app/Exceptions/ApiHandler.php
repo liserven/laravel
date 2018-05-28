@@ -9,7 +9,9 @@
 namespace App\Exceptions;
 
 
+use Dotenv\Exception\ValidationException;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use function MongoDB\BSON\toJSON;
 
 class ApiHandler extends Handler
@@ -33,6 +35,12 @@ class ApiHandler extends Handler
             $this->msg = $exception->msg;
             $this->error_code = $exception->error_code;
 
+        }elseif ($exception instanceof ValidationException ){
+            redirect()->back()->withErrors();
+            $errors = session('errors');
+            throw new ParameterException([
+                'msg'=> $errors->first(),
+            ]);
         }
         else{
             $this->code = 500;
@@ -47,7 +55,7 @@ class ApiHandler extends Handler
             'error_code' => $this->error_code,
             'request_url' => request()->path()
         ];
-        return json_encode($result);
+        return response()->json($result);
     }
 
 

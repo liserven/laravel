@@ -90,8 +90,10 @@
             </tr>
             </thead>
             <tbody class="">
+            <input type="hidden" id="del_url" value="{{ route('action_delete') }}">
             @foreach($page as $key=> $vo)
-                <tr data-index="0" class="tbody_content" data-id="{{$vo['md_id']}}">
+                <tr data-index="0" class="tbody_content" data-id="{{$vo['ad_id']}}" module="{{ encrypt('action_data') }}" >
+                    <input type="hidden" value="{{ csrf_token() }}" id="csrf_token">
 
                     <td>
                         <div class="layui-table-cell laytable-cell-1-1 laytable-cell-checkbox">
@@ -164,3 +166,13 @@
 </div>
 </div>
 </div>
+@section('footer')
+    <script>
+        var _token = '{{csrf_token()}}';
+        $.ajaxSetup({
+            headers: {
+                'XSRF-TOKEN': _token
+            }
+        });
+    </script>
+    @endsection

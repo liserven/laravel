@@ -3,10 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
-use Faker\Provider\Base;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -53,27 +50,5 @@ class Handler extends ExceptionHandler
     {
             return parent::render($request, $exception);
     }
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
 
-        if($request->expectsJson()){
-            $response=response()->json([
-                'status'=>3,
-                'msg' => $exception->getMessage(),
-                'errors'=>[],
-            ], 200);
-        }else{
-            $response=redirect()->guest(route('login'));
-        }
-        return $response;
-    }
-
-    protected function invalidJson($request, ValidationException $exception)
-    {
-        return response()->json([
-            'status'=>2,
-            'msg' => $exception->getMessage(),
-            'errors' => $exception->errors(),
-        ], $exception->status);
-    }
 }

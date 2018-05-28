@@ -31,7 +31,7 @@ class ActionPost extends FormRequest
     public function messages()
     {
         return [
-            'name.max'=> '名称不能太长'
+            'name.required'=> '名称不能太长'
         ];
     }
 }

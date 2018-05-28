@@ -49,3 +49,4 @@
 @yield('script')
 </body>
 </html>
+@yield('footer')
