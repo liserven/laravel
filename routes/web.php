@@ -27,28 +27,17 @@ Route::get('admin/member/doEdit', 'admin\MemberController@doEdit');
 
 
 //行为列表
-
 Route::get('admin/action/tolist', 'admin\ActionController@toList');
 Route::any('admin/action/doAdd', 'admin\ActionController@doAdd');
-Route::get('admin/action/doEdit', 'admin\ActionController@doEdit');
+Route::post('admin/action/editOrder','admin\ActionController@editOrder');
+Route::post('admin/action/editStatus','admin\ActionController@editStatus');
 
 
-//所有需要验证id的控制器
-//Route::group(['middleware'=> ['IdMust'] ], function (){
-//    //行为删除
-//    Route::post('/admin/action/doDel', 'admin\ActionController@doDel');
-//});
+//角色管理
+Route::get('admin/role/tolist', 'admin\RoleController@toList');
+Route::any('admin/role/doAdd', 'admin\RoleController@doAdd');
+Route::post('admin/role/editOrder','admin\RoleController@editOrder');
+Route::post('admin/role/editStatus','admin\RoleController@editStatus');
+Route::post('admin/role/doDel','admin\RoleController@doDel');
 
-
-Route::post('/home', 'HomeController@index')->name('home');
-
-//管理员列表
-Route::get('demo', 'admin\MemberController@demo');
-
-
-Route::group(['middleware'=> ['demo'] ], function (){
-
-    Route::get('demo1', 'admin\MemberController@demo1');
-    Route::get('demo2', 'admin\MemberController@demo2');
-} );
 

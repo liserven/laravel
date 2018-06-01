@@ -6,13 +6,14 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
         , common = layui.custom;
 
     //改变状态
-    form.on('switch(eidt_status)', function(data){
+    $('.eidt_status').click( function(){
         var url = 'editStatus';
         var type = $(this).attr('type-d');
         $(this).attr('type-d',type==1?2:1);
         var vale = {
             id : $(this).parents('.tbody_content').attr('data-id'),
             state : type,
+            module : $(this).parents('.tbody_content').attr('module')
         };
         if( vale.id==undefined || vale.id=='' ){
             layer.msg('参数错误', { icon:2, time:1000 });
@@ -31,19 +32,19 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
         
     });
 
-    form.on('submit(seach_phone)', function(data){
-        return false;
-        layer.msg('dsadsa');
-        console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-        console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-        console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-    });
+    // form.on('submit(seach_phone)', function(data){
+    //     return false;
+    //     layer.msg('dsadsa');
+    //     console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+    //     console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+    //     console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+    //     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    // });
 
 
     //一条数据删除
     $(".do_del").click(function () {
-        var url = $("#del_url").val();
+        var url = 'doDel';
         var id = $(this).parents('.tbody_content').attr('data-id');
         var module = $(this).parents('.tbody_content').attr('module');
         layer.confirm('确定要删除么？', {
@@ -120,8 +121,9 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
             var order = $(this).val();
             var module = $(this).attr('module');
             var id = $(this).attr('data-id');
-            var url = window.url('admin/'+module+'/editOrder');
+            var url = 'editOrder';
             $.post(url, { id: id, order: order}, function (result) {
+                console.log(result);
                 if( result.bol ){
                     layer.msg(result.msg,{icon:1,time:2000});
                     window.location.reload();
@@ -136,13 +138,19 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
 
     //添加
     $('.add').click(function () {
-        common.dialog({url:'doAdd', area:[ '80%','750px' ]},true);
+        var id = $(this).attr('data-id');
+        var url = 'doAdd';
+        if( id.length > 0 )
+        {
+            url = 'doAdd?id='+id;
+        }
+        common.dialog({url:url, area:[ '80%','750px' ]},true);
     });
 
     //修改
     $('.edit').click(function () {
         var id = $(this).parents('tr').attr('data-id');
-        common.dialog({url:'doEdit/id/'+id, area:[ '70%','80%' ]}, true);
+        common.dialog({url:'doEdit/'+id, area:[ '70%','80%' ]}, true);
     });
 
     //修改

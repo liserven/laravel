@@ -12,6 +12,9 @@ namespace App\Http\Model;
 class RoleDataModel extends BaseModel
 {
     protected $table = 'role_data';
+    protected $dateFormat = 'U';
+    protected $primaryKey = 'rd_id';
+
 
 
 }

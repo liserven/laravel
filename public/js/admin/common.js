@@ -321,7 +321,6 @@ layui.define(['form', 'layer','laydate','upload'], function (exports) {
          */
         dMsg : function(options, isParents, time, callback){
 
-            options = eval("("+options+")");
             //1为刷新本页面 2为刷新父级页面
             var parentsResearch = isParents == 1 ? isParents : 2;
             var default_option = {

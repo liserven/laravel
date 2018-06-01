@@ -14,8 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::group([
-    'middleware'=> ['IdMust', 'api'],
+    'middleware'=> ['IdMust'],
 ], function () {
     Route::post("admin/action/doDel", "admin\ActionController@doDel")->name('action_delete');
+
 });
 

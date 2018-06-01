@@ -21,6 +21,8 @@ class IndexController extends BaseController
         parent::__construct();
     }
 
+
+
     public function index(){
 
         $actions = $this->getAction();

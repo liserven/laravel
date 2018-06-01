@@ -17,7 +17,7 @@
 @extends('admin.layout.frame')
 
 <fieldset class="layui-elem-field layui-field-title">
-    <legend>行为管理
+    <legend>角色管理
         <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-sm refresh"><i class="layui-icon">&#x1002;</i>刷新</a>
         <a href="javascript:;" class="layui-btn layui-btn-container layui-btn-sm add" data-id=""><i class="fa fa-plus"></i>添加</a>
     </legend>
@@ -66,13 +66,13 @@
                 </th>
                 <th data-field="name">
                     <div class="layui-table-cell">
-                        <span>行为名称</span>
+                        <span>角色名称</span>
                     </div>
                 </th>
 
                 <th data-field="name">
                     <div class="layui-table-cell">
-                        <span>Url</span>
+                        <span>所属管理员</span>
                     </div>
                 </th>
                 <th data-field="type">
@@ -92,7 +92,7 @@
             <tbody class="">
             <input type="hidden" id="del_url" value="{{ route('action_delete') }}">
             @foreach($page as $key=> $vo)
-                <tr data-index="0" class="tbody_content" data-id="{{$vo['ad_id']}}" module="{{ encrypt('action_data') }}" >
+                <tr data-index="0" class="tbody_content" data-id="{{$vo['rd_id']}}" module="{{ encrypt('action_data') }}" >
                     <input type="hidden" value="{{ csrf_token() }}" id="csrf_token">
 
                     <td>
@@ -105,15 +105,15 @@
                     </td>
                     <td>
                         <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers">
-                            <span>{{$vo['ad_id']}}</span>
+                            <span>{{$vo['rd_id']}}</span>
                         </div>
                     </td>
                     <td>
-                        <div class="layui-table-cell">{{$vo['ad_name']}}</div>
+                        <div class="layui-table-cell">{{$vo['rd_name']}}</div>
                     </td>
 
                     <td>
-                        <div class="layui-table-cell">{{$vo['ad_url']}}</div>
+                        <div class="layui-table-cell">{{$vo['rd_name']}}</div>
                     </td>
                     <td  style="width: 100px;">
                         <div class="layui-table-cell" ><input value='{{$vo['order']}}' class='layui-input edit-order layui-table-cell' /></div>
@@ -145,7 +145,7 @@
                                 <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="1"><i class="fa fa-edit"></i> 启用</a>
 
                             @endif
-                            <a class="layui-btn layui-btn-primary layui-btn-xs add" data-id="{{$vo['ad_id']}}"><i class="fa fa-edit"></i> 编辑</a>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs add" data-id="{{$vo['rd_id']}}"><i class="fa fa-edit"></i> 编辑</a>
                             <a class="layui-btn layui-btn-danger layui-btn-xs do_del"><i class="fa fa-times-circle-o"></i> 删除</a>
 
                         </div>

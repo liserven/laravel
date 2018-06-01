@@ -42,10 +42,8 @@
 @yield('content')
 <!-- 全局js -->
 <script src="/static/hplus/js/jquery.min.js?v=2.1.4"></script>
-<script src="/static/hplus/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/Js/{{$action_name['mName']}}/{{strtolower($action_name['cName'])}}/{{strtolower($action_name['aName'])}}.js?v={{time()}}"></script>
 
-<!-- 自定义js -->
-<script src="/static/hplus/js/content.js?v=1.0.0"></script>
 @yield('script')
 </body>
 </html>

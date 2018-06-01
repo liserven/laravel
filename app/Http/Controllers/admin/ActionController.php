@@ -9,14 +9,24 @@
 namespace App\Http\Controllers\admin;
 
 
+use App\Exceptions\ActionException;
 use App\Http\Model\ActionDataModel;
 use App\Validate\ActionValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class ActionController extends BaseController
 {
-    public function toList(Request $request)
+
+    //自定义前置操作
+    public function beForeAction()
+    {
+        View::share('action',ActionDataModel::where([ 'ad_pid'=> 0 ])->get());
+        parent::beForeAction();
+    }
+
+    public function toList()
     {
         $page = ActionDataModel::getPage();
         return view('admin.action.tolist', [ 'page'=> $page]);
@@ -27,11 +37,22 @@ class ActionController extends BaseController
         if($request->isMethod('post'))
         {
             (new ActionValidate())->goCheck();
-            $model = new ActionDataModel();
-            $model->ad_url = $request->url;
-            $model->ad_name = $request->name;
-            $model->ad_pid = $request->pid;
-            if( $model->save())
+            if( is_null($request->id) ){
+
+                //如果id不存在的话。就是添加
+                $model = new ActionDataModel();
+                $model->ad_url = $request->url;
+                $model->ad_name = $request->name;
+                $model->ad_pid = $request->pid;
+                $result = $model->save();
+            }else {
+                $model = $action = ActionDataModel::find($request->id);
+                $model->ad_url = $request->url;
+                $model->ad_name = $request->name;
+                $model->ad_pid = $request->pid;
+                $result = $model->save();
+            }
+            if( $result )
             {
                 return $this->resultHandler();
             }
@@ -39,23 +60,32 @@ class ActionController extends BaseController
                 return $this->resultHandler('操作失败', false);
             }
         }else{
-            $action = ActionDataModel::where([ 'ad_pid'=> 0])->get();
-            return view('admin.action.doadd')->with('action', $action);
+            if( is_null($request->id) )
+            {
+                $data = [];
+            }else{
+                $data = $action = ActionDataModel::where([ 'ad_id'=> $request->id ])->first();
+            }
+            return view('admin.action.doadd')->with('data', $data);
         }
     }
-
-    public function doEdit()
+    public function editOrder(Request $request)
     {
-        $page = ActionDataModel::getPage();
-        return view('admin.action.tolist', [ 'page'=> $page]);
-
+        $data = ActionDataModel::find($request->id);
+        $data->order= $request->order;
+        return $this->resultHandles($data->save());
     }
-
-//公共的删除方法  如果不需要可在子类中继承重写
     public function doDel(Request $request)
     {
         $result = DB::table('action_data')->where(['ad_id'=> $request->id])->delete();
         return  $this->resultHandles($result);
     }
+    public function editStatus(Request $request)
+    {
+        $data = ActionDataModel::find($request->id);
+        $data->status = $request->state;
+        return $this->resultHandles($data->save());
+    }
+
 
 }

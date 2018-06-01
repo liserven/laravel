@@ -13,8 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
+
     public static function getPage($where=[], $rows=10)
     {
-        return self::where($where)->paginate($rows);
+        return self::where($where)->orderBy('order','asc')->orderBy('created_at', 'desc')->paginate($rows);
     }
 }

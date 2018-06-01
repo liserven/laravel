@@ -12,4 +12,5 @@ namespace App\Http\Model;
 class ActionDataModel extends BaseModel
 {
     protected $table = 'action_data';
+    protected $primaryKey = 'ad_id';
 }

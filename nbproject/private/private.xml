@@ -4,6 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/phpStudy/WWW/qz/app/Http/Controllers/admin/IndexController.php</file>
+            <file>file:/D:/phpStudy/WWW/qz/app/Http/Controllers/admin/RoleController.php</file>
+            <file>file:/D:/phpStudy/WWW/qz/resources/views/admin/role/tolist.blade.php</file>
+            <file>file:/D:/phpStudy/WWW/qz/app/Http/Model/RoleDataModel.php</file>
+            <file>file:/D:/phpStudy/WWW/qz/app/Http/Model/BaseModel.php</file>
+            <file>file:/D:/phpStudy/WWW/qz/resources/views/admin/role/doadd.blade.php</file>
         </group>
     </open-files>
 </project-private>
