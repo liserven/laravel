@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
-
+    public $timestamps  = false;
     public static function getPage($where=[], $rows=10)
     {
         return self::where($where)->orderBy('order','asc')->orderBy('created_at', 'desc')->paginate($rows);

@@ -22,7 +22,8 @@ class ActionData extends Migration
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
-            $table->timestamps();
+            $table->integer('created_at');
+            $table->integer('updated_at');
             $table->collation = 'utf8_unicode_ci';
         });
     }

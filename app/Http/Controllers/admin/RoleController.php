@@ -92,7 +92,7 @@ class RoleController extends BaseController
                     $roleActionData = [];
                     foreach ( $actions as $key=> $value )
                     {
-                        $roleActionData[$key]['role_id']= $roleModel->id;
+                        $roleActionData[$key]['role_id']= $roleModel->rd_id;
                         $roleActionData[$key]['action_id'] = $value;
                     }
                     DB::table('role_action')->insert($roleActionData);

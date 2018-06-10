@@ -2,19 +2,27 @@
 /**
  * Created by PhpStorm.
  * User: 李沈阳
+ * Date: 2018/5/11
+ * Time: 10:51
+ */
+?>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: 李沈阳
  * Date: 2018/5/10
  * Time: 15:05
  */
 ?>
 @extends('admin.layout.frame')
 
-
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>行为管理
+        <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-sm refresh"><i class="layui-icon">&#x1002;</i>刷新</a>
+        <a href="javascript:;" class="layui-btn layui-btn-container layui-btn-sm add" data-id=""><i class="fa fa-plus"></i>添加</a>
+    </legend>
+</fieldset>
 <div class="layui-form layui-border-box layui-table-view" lay-filter="content-box" style="padding: 20px;border: 0;">
-    <fieldset class="layui-elem-field layui-field-title">
-        <legend>banner管理
-            <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-xs refresh"><i class="layui-icon">&#x1002;</i>刷新</a>
-        </legend>
-    </fieldset>
     <form action="">
         <div class="layui-form-item">
             <label class="layui-form-label">地区：</label>
@@ -42,11 +50,7 @@
         <table class="layui-table" style="width: 100%; border: 1px solid #eee">
             <thead>
             <tr>
-                <th data-field="0">
-                    <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers">
-                        <span>#</span>
-                    </div>
-                </th>
+
                 <th data-field="1" data-unresize="true">
                     <div class="layui-table-cell laytable-cell-1-1 laytable-cell-checkbox">
                         <input name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose" type="checkbox">
@@ -56,27 +60,20 @@
                     </div>
                 </th>
                 <th data-field="id">
-                    <div class="layui-table-cell laytable-cell-1-id">
-                        <span>ID</span>
-                        <span class="layui-table-sort layui-inline">
-                            <i class="layui-edge layui-table-sort-asc"></i><i
-                                    class="layui-edge layui-table-sort-desc"></i>
-                        </span>
+                    <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers">
+                        <span>id</span>
                     </div>
                 </th>
                 <th data-field="name">
                     <div class="layui-table-cell">
-                        <span>Banner标题</span>
+                        <span>111</span>
                     </div>
                 </th>
 
                 <th data-field="name">
                     <div class="layui-table-cell">
-                        <span>显示区域</span>
+                        <span>Url</span>
                     </div>
-                </th>
-                <th data-field="type">
-                    <div class="layui-table-cell"><span>Banner图片</span></div>
                 </th>
                 <th data-field="type">
                     <div class="layui-table-cell"><span>Banner排序</span></div>
@@ -93,48 +90,62 @@
             </tr>
             </thead>
             <tbody class="">
-            @foreach($page as $vo)
-                <tr data-index="0" class="tbody_content" data-id="{{$vo['md_id']}}">
-                    <td >
-                        <div class="layui-table-cell">{$key}</div>
-                    </td>
+            <input type="hidden" id="del_url" value="{{ route('action_delete') }}">
+            @foreach($page as $key=> $vo)
+                <tr data-index="0" class="tbody_content" data-id="{{$vo['ad_id']}}" module="{{ encrypt('action_data') }}" >
+                    <input type="hidden" value="{{ csrf_token() }}" id="csrf_token">
+
                     <td>
-                        <div class="layui-table-cell">
-                            <input name="layTableCheckbox" class="" lay-skin="primary" value="1" type="checkbox">
+                        <div class="layui-table-cell laytable-cell-1-1 laytable-cell-checkbox">
+                            <input name="layTableCheckbox" lay-skin="primary" type="checkbox">
                             <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                 <i class="layui-icon"></i>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <div class="layui-table-cell">{{$vo['md_id']}}</div>
-                    </td>
-                    <td>
-                        <div class="layui-table-cell">{{$vo['md_id']}}</div>
-                    </td>
-
-                    <td>
-                        <div class="layui-table-cell">{{$vo['md_id']}}</div>
-                    </td>
-                    <td>
-                        <div class="layui-table-cell" style="height:50px"><img src="{{$vo['md_id']}}" alt=""></div>
-                    </td>
-                    <td>
-                        <div class="layui-table-cell"><input value='{{$vo['md_id']}}' class='layui-input edit-order' style='height:28px;line-height: 28px;'/></div>
-                    </td>
-
-                    <td>
-                        <div class="layui-table-cell">{{$vo['md_id']}}</div>
-                    </td>
-                    <td data-id="1">
-                        <div class="layui-table-cell">
-                            <input type="checkbox" lay-filter="eidt_status" lay-skin="switch" lay-text="启用|停用"
-                                   type-d="{{$vo['md_id']}}" {{$vo['md_id']}}>
+                        <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers">
+                            <span>{{$vo['ad_id']}}</span>
                         </div>
                     </td>
                     <td>
+                        <div class="layui-table-cell">{{$vo['ad_name']}}</div>
+                    </td>
+
+                    <td>
+                        <div class="layui-table-cell">{{$vo['ad_url']}}</div>
+                    </td>
+                    <td  style="width: 100px;">
+                        <div class="layui-table-cell" ><input value='{{$vo['order']}}' class='layui-input edit-order layui-table-cell' /></div>
+                    </td>
+
+                    <td>
+                        <div class="layui-table-cell">{{$vo['create_at']}}</div>
+                    </td>
+                    <td data-id="1">
+
+                            @if( $vo['status'] == 1 )
+                            <div class="layui-table-cell text-success">
+                            <i class="fa fa-check"></i> 正常
+                            </div>
+
+                        @else
+                            <div class="layui-table-cell text-danger">
+                                <i class="fa fa-times"></i> 停用
+                            </div>
+
+                            @endif
+                    </td>
+                    <td>
                         <div class="layui-table-cell">
-                            <a class="layui-btn layui-btn-primary layui-btn-xs edit"><i class="fa fa-edit"></i> 编辑</a>
+                            @if( $vo['status'] ==  1 )
+                                <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="2"><i class="fa fa-edit"></i> 停用</a>
+
+                            @else
+                                <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="1"><i class="fa fa-edit"></i> 启用</a>
+
+                            @endif
+                            <a class="layui-btn layui-btn-primary layui-btn-xs add" data-id="{{$vo['ad_id']}}"><i class="fa fa-edit"></i> 编辑</a>
                             <a class="layui-btn layui-btn-danger layui-btn-xs do_del"><i class="fa fa-times-circle-o"></i> 删除</a>
 
                         </div>
@@ -144,7 +155,9 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="13">{{$page->links()}}</td>
+                <td colspan="13">
+                        {{$page->links()}}
+                </td>
             </tr>
             </tfoot>
         </table>
@@ -153,3 +166,13 @@
 </div>
 </div>
 </div>
+@section('footer')
+    <script>
+        var _token = '{{csrf_token()}}';
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': _token
+            }
+        });
+    </script>
+    @endsection

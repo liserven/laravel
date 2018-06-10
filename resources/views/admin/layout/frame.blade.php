@@ -21,6 +21,7 @@
     <link href="/static/hplus/css/animate.css" rel="stylesheet">
     <link href="/static/hplus/css/style.css?v=4.1.0" rel="stylesheet">
     <link href="/static/layui/css/layui.css" rel="stylesheet">
+    <link href="/css//admin/common.css" rel="stylesheet">
     <script src="/static/layui/layui.js"></script>
     @yield('link')
     <script type="text/javascript">

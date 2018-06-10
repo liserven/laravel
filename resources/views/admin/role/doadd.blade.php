@@ -8,13 +8,6 @@
 ?>
 
 @extends('admin.layout.frame')
-@section('link')
-    <style>
-        .layui-form-checkbox[lay-skin="primary"] i{
-            top:0 !important;
-        }
-    </style>
-    @endsection
 @section('content')
 
     <form class="layui-form layui-row layui-col-space10" action="" style="padding: 20px;">

@@ -26,8 +26,8 @@ class Member extends Migration
             $table->string('logo');
             $table->string('md_name', 55);
             $table->integer('order')->default(99);
-            $table->timestamps();
-
+            $table->integer('created_at');
+            $table->integer('updated_at');
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

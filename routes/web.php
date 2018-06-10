@@ -22,7 +22,7 @@ Route::get('admin/welcome', 'admin\IndexController@welcome');
 
 //管理员列表
 Route::get('admin/member/tolist', 'admin\MemberController@toList');
-Route::get('admin/member/doAdd', 'admin\MemberController@doAdd');
+Route::any('admin/member/doAdd', 'admin\MemberController@doAdd');
 Route::get('admin/member/doEdit', 'admin\MemberController@doEdit');
 
 

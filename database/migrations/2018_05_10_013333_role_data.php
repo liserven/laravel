@@ -15,11 +15,11 @@ class RoleData extends Migration
     {
         Schema::create('role_data', function (Blueprint $table) {
             $table->increments('rd_id');
-            $table->string('role_name', 50)->comment('角色名称');
-            $table->string('role_logo', 200)->comment('角色图片');
+            $table->string('rd_name', 50)->comment('角色名称');
+            $table->string('rd_logo', 200)->comment('角色图片');
             $table->integer('order')->default(99);
-            $table->timestamps();
-
+            $table->integer('created_at');
+            $table->integer('updated_at');
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

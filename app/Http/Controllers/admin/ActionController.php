@@ -44,12 +44,14 @@ class ActionController extends BaseController
                 $model->ad_url = $request->url;
                 $model->ad_name = $request->name;
                 $model->ad_pid = $request->pid;
+                $model->created_at = time();
                 $result = $model->save();
             }else {
                 $model = $action = ActionDataModel::find($request->id);
                 $model->ad_url = $request->url;
                 $model->ad_name = $request->name;
                 $model->ad_pid = $request->pid;
+                $model->updated_at = time();
                 $result = $model->save();
             }
             if( $result )

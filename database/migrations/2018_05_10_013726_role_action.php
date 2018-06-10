@@ -18,8 +18,8 @@ class RoleAction extends Migration
             $table->integer('action_id')->comment('行为');
             $table->integer('role_id')->comment('角色');
             $table->integer('order')->default(99);
-            $table->timestamps();
-
+            $table->integer('created_at');
+            $table->integer('updated_at');
             $table->tinyInteger('status')->default(1);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
