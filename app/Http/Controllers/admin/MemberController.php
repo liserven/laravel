@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Model\MemberModel;
+use App\Http\Model\MemberRoleModel;
 use App\Validate\MemberValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,12 @@ class MemberController extends BaseController
     public function toList()
     {
         $data = MemberModel::getPage();
+        foreach ( $data as $key=> &$member)
+        {
+            $member['roles'] = DB::table('member_role as mr')->where( [ 'member_id'=> $member->id])
+                ->leftJoin('role_data as rd', 'rd.rd_id', '=', 'mr.role_id')
+                ->select('rd_name')->get();
+        }
         return view('admin.member.tolist', [
             'page' => $data
         ]);
@@ -38,10 +45,7 @@ class MemberController extends BaseController
         $roleData = RoleDataModel::getPage();
 
         if ($request->isMethod('post')) {
-
-
             //验证提交数据
-            (new MemberValidate())->goCheck();
             $roleArr = $request->role;
             //新增的话需要给新的管理员一个身份。。。 赋于他一个身份的权限后才能生效
             if (empty($roleArr)) {
@@ -61,15 +65,14 @@ class MemberController extends BaseController
                     $memberCheckData->email = $request->email;
                     $memberCheckData->order = $request->order;
                     $memberCheckData->status = $request->status;
-                    $memberCheckData->md_password = md5($request->password);
                     $memberCheckData->is_super = $request->super;
                     $memberCheckData->updated_at = time();
                     $memberCheckData->save();
-                    $memberInsertPrimaryKey = $memberCheckData->md_id;
+                    $memberInsertPrimaryKey = $memberCheckData->id;
                     DB::table('member_role')->where([ 'member_id'=> $memberInsertPrimaryKey])->delete();
                 } else {
                     //新增
-
+                    (new MemberValidate())->goCheck();
                     $memberCheckData = MemberModel::where(['md_phone' => $request->phone])->first();
                     if ($memberCheckData) {
                         return $this->resultHandler('手机号已经存在...', false);
@@ -106,8 +109,13 @@ class MemberController extends BaseController
             {
                 //如果id存在为修改页面
                 $data = MemberModel::find($request->id);
+                $MemberRoleData = DB::table('member_role as mr')->where( [ 'member_id'=> $request->id])
+                    ->leftJoin('role_data as rd', 'rd.rd_id', '=', 'mr.role_id')
+                    ->get();
+                $roleIds = array_column($MemberRoleData->toArray(), 'rd_id');
                 return view('admin.member.doadd', [
                     'data'=> $data,
+                    'role_ids'=> $roleIds,
                     'role_data'=> $roleData
                 ]);
             }

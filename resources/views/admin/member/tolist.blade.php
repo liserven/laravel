@@ -17,7 +17,7 @@
 @extends('admin.layout.frame')
 
 <fieldset class="layui-elem-field layui-field-title">
-    <legend>行为管理
+    <legend>管理员管理
         <a href="javascript:;" class="layui-btn layui-btn-primary layui-btn-sm refresh"><i class="layui-icon">&#x1002;</i>刷新</a>
         <a href="javascript:;" class="layui-btn layui-btn-container layui-btn-sm add" data-id=""><i class="fa fa-plus"></i>添加</a>
     </legend>
@@ -66,17 +66,22 @@
                 </th>
                 <th data-field="name">
                     <div class="layui-table-cell">
-                        <span>111</span>
+                        <span>名称</span>
                     </div>
                 </th>
 
                 <th data-field="name">
                     <div class="layui-table-cell">
-                        <span>Url</span>
+                       <span>手机</span>
                     </div>
                 </th>
                 <th data-field="type">
-                    <div class="layui-table-cell"><span>Banner排序</span></div>
+                    <div class="layui-table-cell"><span>email</span></div>
+                </th>
+                <th data-field="name">
+                    <div class="layui-table-cell">
+                        <span>角色</span>
+                    </div>
                 </th>
                 <th data-field="createdTime">
                     <div class="layui-table-cell"><span>创建时间</span></div>
@@ -92,7 +97,7 @@
             <tbody class="">
             <input type="hidden" id="del_url" value="{{ route('action_delete') }}">
             @foreach($page as $key=> $vo)
-                <tr data-index="0" class="tbody_content" data-id="{{$vo['ad_id']}}" module="{{ encrypt('action_data') }}" >
+                <tr data-index="0" class="tbody_content" data-id="{{$vo['md_id']}}" module="{{ encrypt('action_data') }}" >
                     <input type="hidden" value="{{ csrf_token() }}" id="csrf_token">
 
                     <td>
@@ -105,22 +110,30 @@
                     </td>
                     <td>
                         <div class="layui-table-cell laytable-cell-1-0 laytable-cell-numbers">
-                            <span>{{$vo['ad_id']}}</span>
+                            <span>{{$vo['md_id']}}</span>
                         </div>
                     </td>
                     <td>
-                        <div class="layui-table-cell">{{$vo['ad_name']}}</div>
+                        <div class="layui-table-cell">{{$vo['md_name']}}</div>
                     </td>
 
                     <td>
-                        <div class="layui-table-cell">{{$vo['ad_url']}}</div>
-                    </td>
-                    <td  style="width: 100px;">
-                        <div class="layui-table-cell" ><input value='{{$vo['order']}}' class='layui-input edit-order layui-table-cell' /></div>
+                        <div class="layui-table-cell">{{$vo['md_phone']}}</div>
                     </td>
 
                     <td>
-                        <div class="layui-table-cell">{{$vo['create_at']}}</div>
+                        <div class="layui-table-cell">{{$vo['email']}}</div>
+                    </td>
+
+                    <td>
+                        <div class="layui-table-cell">
+                            @foreach ( $vo['roles'] as $role)
+                                {{ $role->rd_name }},
+                                @endforeach
+                        </div>
+                    </td>
+                    <td>
+                        <div class="layui-table-cell">{{ date('Y-m-d H:i:s' ,$vo['created_at']) }}</div>
                     </td>
                     <td data-id="1">
 
@@ -145,7 +158,7 @@
                                 <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="1"><i class="fa fa-edit"></i> 启用</a>
 
                             @endif
-                            <a class="layui-btn layui-btn-primary layui-btn-xs add" data-id="{{$vo['ad_id']}}"><i class="fa fa-edit"></i> 编辑</a>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs add" data-id="{{$vo['id']}}"><i class="fa fa-edit"></i> 编辑</a>
                             <a class="layui-btn layui-btn-danger layui-btn-xs do_del"><i class="fa fa-times-circle-o"></i> 删除</a>
 
                         </div>

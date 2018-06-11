@@ -19,7 +19,7 @@
                 <div class="layui-col-md3">
                     <input type="text" name="name" placeholder="请输入管理员名称"
                            @if( !empty( $data))
-                           value="{{$data['ad_url']}}"
+                           value="{{$data['md_name']}}"
                            @endif
                            class="layui-input">
                 </div>
@@ -29,13 +29,13 @@
                 <div class="layui-col-md3">
                     <input type="text" name="phone" placeholder="请输入管理员手机"
                            @if( !empty( $data))
-                           value="{{$data['ad_url']}}"
+                           value="{{$data['md_phone']}}"
                            @endif
                            class="layui-input">
                 </div>
                 <strong style="color:#f60; display: inline-block; height:45px; line-height:45px;">(做为登陆帐号使用)</strong>
             </div>
-
+            @if( empty( $data) )
             <div class="layui-form-item">
                 <label class="layui-form-label">密码：</label>
                 <div class="layui-col-md3">
@@ -56,12 +56,13 @@
                            class="layui-input">
                 </div>
             </div>
+            @endif
             <div class="layui-form-item">
                 <label class="layui-form-label">邮箱：</label>
                 <div class="layui-col-md3">
                     <input type="text" name="email" placeholder="请输入管理员邮箱"
                            @if( !empty( $data))
-                           value="{{$data['ad_url']}}"
+                           value="{{$data['email']}}"
                            @endif
                            class="layui-input">
                 </div>
@@ -74,7 +75,7 @@
                         <input type="checkbox" value="{{ $v['rd_id'] }}" name="role[]" lay-filter="check-one"
                                title="{{$v['rd_name'] }}" class="check-one" lay-skin="primary"
                                @if( !empty($data))
-                               @if( in_array($v['ad_id'], $data['actions'] ))
+                               @if( in_array($v['rd_id'], $role_ids ))
                                checked
                                 @endif
                                 @endif
@@ -120,7 +121,7 @@
                 <div class="layui-form-item">
                     <div class="layui-input-block">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="id" @if( !empty($data) ) value="{{$data['ad_id']}}"@endif>
+                        <input type="hidden" name="id" @if( !empty($data) ) value="{{$data['id']}}"@endif>
                         <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
