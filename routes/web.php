@@ -24,6 +24,12 @@ Route::get('admin/welcome', 'admin\IndexController@welcome');
 Route::get('admin/member/tolist', 'admin\MemberController@toList');
 Route::any('admin/member/doAdd', 'admin\MemberController@doAdd');
 Route::get('admin/member/doEdit', 'admin\MemberController@doEdit');
+Route::post('admin/member/editStatus','admin\MemberController@editStatus');
+
+Route::prefix('admin')->group(function (){
+    Route::post('member/doDel', 'admin\MemberController@doDel');
+});
+
 
 
 //行为列表
@@ -39,5 +45,12 @@ Route::any('admin/role/doAdd', 'admin\RoleController@doAdd');
 Route::post('admin/role/editOrder','admin\RoleController@editOrder');
 Route::post('admin/role/editStatus','admin\RoleController@editStatus');
 Route::post('admin/role/doDel','admin\RoleController@doDel');
+
+
+Route::prefix('gang')->group(function (){
+    Route::get('login/index', 'gang\LoginController@index');
+    Route::get('login/login', 'gang\LoginController@login');
+    Route::get('index/gangsList', 'gang\IndexController@gangsList');
+});
 
 

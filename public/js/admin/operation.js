@@ -2,6 +2,7 @@
 
 layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
     var $ = layui.jquery
+        , layer = layui.layer
         , form = layui.form
         , common = layui.custom;
 
@@ -86,8 +87,8 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
                 {
                     ids.push(deleteId.val()) ;
                 }
-            })
-            if( ids.length == 0 )
+            });
+            if( ids.length ==0 )
             {
                 layer.msg('无选中数据..');
                 return false;

@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\View;
 
 class BaseController extends Controller
 {
-    private $module ;
+    //只有在工会管理登录才有用。 其他时候不用这个变量
+    protected $gangId;
+
     //构造方法
     public function __construct()
     {

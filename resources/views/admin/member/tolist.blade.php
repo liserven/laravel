@@ -25,22 +25,9 @@
 <div class="layui-form layui-border-box layui-table-view" lay-filter="content-box" style="padding: 20px;border: 0;">
     <form action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">地区：</label>
+            <label class="layui-form-label">手机：</label>
             <div class="layui-input-inline">
-                <select name="province"  lay-filter="province">
-                    <option value="">全部</option>
-                    <volist name="province" id="vo">
-                        <option value="{$vo.province}">{$vo.province}</option>
-                    </volist>
-                </select>
-            </div>
-            <div class="layui-input-inline">
-                <select name="city" class="city">
-                </select>
-            </div>
-            <label class="layui-form-label">标题：</label>
-            <div class="layui-input-inline">
-                <input type="text" name="seach" class="layui-input">
+                <input type="text" name="phone" class="layui-input">
             </div>
             <button class="layui-btn layui-btn-small add" type="submit">搜索</button>
             <span class="" style="display: inline-block; float:right;font-size: 16px;" >共 <strong style="color:#f60">{{$page->total()}}</strong> 条数据 </span>
@@ -97,7 +84,7 @@
             <tbody class="">
             <input type="hidden" id="del_url" value="{{ route('action_delete') }}">
             @foreach($page as $key=> $vo)
-                <tr data-index="0" class="tbody_content" data-id="{{$vo['md_id']}}" module="{{ encrypt('action_data') }}" >
+                <tr data-index="0" class="tbody_content" data-id="{{$vo['id']}}" module="{{ encrypt('member_data') }}" >
                     <input type="hidden" value="{{ csrf_token() }}" id="csrf_token">
 
                     <td>
@@ -152,10 +139,10 @@
                     <td>
                         <div class="layui-table-cell">
                             @if( $vo['status'] ==  1 )
-                                <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="2"><i class="fa fa-edit"></i> 停用</a>
+                                <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="2"><i class="fa fa-circle-o"></i> 停用</a>
 
                             @else
-                                <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="1"><i class="fa fa-edit"></i> 启用</a>
+                                <a class="layui-btn layui-btn-primary layui-btn-xs eidt_status" type-d="1"><i class="layui-icon layui-icon-release">&#xe609;</i> 启用</a>
 
                             @endif
                             <a class="layui-btn layui-btn-primary layui-btn-xs add" data-id="{{$vo['id']}}"><i class="fa fa-edit"></i> 编辑</a>

@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Model\MemberLogModel;
 use App\Http\Model\MemberModel;
 use App\Http\Model\MemberRoleModel;
 use App\Validate\MemberValidate;
@@ -25,9 +26,15 @@ class MemberController extends BaseController
 
 
     //管理员列表
-    public function toList()
+    public function toList(Request $request)
     {
-        $data = MemberModel::getPage();
+        $where = [];
+        $phone = $request->phone;
+        if( $phone )
+        {
+            $where['md_phone'] = $phone;
+        }
+        $data = MemberModel::getPage($where);
         foreach ( $data as $key=> &$member)
         {
             $member['roles'] = DB::table('member_role as mr')->where( [ 'member_id'=> $member->id])
@@ -68,8 +75,10 @@ class MemberController extends BaseController
                     $memberCheckData->is_super = $request->super;
                     $memberCheckData->updated_at = time();
                     $memberCheckData->save();
+
                     $memberInsertPrimaryKey = $memberCheckData->id;
                     DB::table('member_role')->where([ 'member_id'=> $memberInsertPrimaryKey])->delete();
+                    MemberLogModel::addMemberLog(1, '1111', '0.0.0.0');
                 } else {
                     //新增
                     (new MemberValidate())->goCheck();
@@ -89,6 +98,8 @@ class MemberController extends BaseController
                         'email' => $request->email,
                         'is_super' => $request->super,
                     ]);
+                    MemberLogModel::addMemberLog(1, '1111', '0.0.0.0');
+
                 }
 
                 //添加角色
@@ -128,28 +139,17 @@ class MemberController extends BaseController
             }
         }
     }
-
-
-    //修改管理员
-    public function doEdit()
+    public function doDel(Request $request)
     {
 
+        $result = DB::table('member_data')->where(['id'=> $request->id])->delete();
+        return  $this->resultHandles($result);
     }
-
-
-    public function demo()
+    public function editStatus(Request $request)
     {
-        return '1';
-    }
-
-    public function dem1()
-    {
-        return 2;
-    }
-
-    public function dem2()
-    {
-        return 3;
+        $data = MemberModel::find($request->id);
+        $data->status = $request->state;
+        return $this->resultHandles($data->save());
     }
 
 
