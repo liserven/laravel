@@ -57,12 +57,20 @@ body.signin {
     border-radius: 3px;
     padding: 30px;
     display: inline-block;
-    margin: 2px;
+    margin: 20px 2px 2px 2px;
     height:300px;
     width:24%;
 }
+.signinpanel .box.active{
+    border-color: #f60;
+    border-width: 3px;
+    border-radius: 3px;
+
+}
 .signinpanel .box img{
-    width:80%;
+    width:150px;
+    height:150px;
+
     border-radius: 50%;
 }
 .signup-footer{border-top: solid 1px rgba(255,255,255,.3);margin:20px 0;padding-top: 15px;}
@@ -98,4 +106,16 @@ body.signin {
         margin:0 20px;
         width:auto;
     }
+}
+.button{
+    margin: 40px 0px;
+
+}
+
+.button a{
+    font-size: 25px;
+}
+.gangs_name{
+    font-size: 20px;
+    margin-top:20px;
 }

@@ -40,28 +40,25 @@
 
 <div class="text-center loginscreen  animated fadeInDown signinpanel">
     <div>
-
+        <input type="hidden" id="checkOver" value="{{ session('is_over') }}">
         <h2>选择你所要操作的圈子</h2>
 
-       <div class="box">
+        @foreach($list as $key=>$value)
+       <div class="box
+            @if($key==0)
+               active
+               @endif
+        " data-id="{{$value->id}}">
            <div>
                <img src="http://ozi65v7vu.bkt.clouddn.com/2018/06/94709201806111729407610.jpg" alt="">
            </div>
+           <p class="gangs_name">
+               <strong >{{$value->name}}</strong>
+           </p>
        </div>
-        <div class="box">
-            <div>
-                <img src="http://ozi65v7vu.bkt.clouddn.com/2018/06/94709201806111729407610.jpg" alt="">
-            </div>
-        </div>
-        <div class="box">
-            <div>
-                <img src="http://ozi65v7vu.bkt.clouddn.com/2018/06/94709201806111729407610.jpg" alt="">
-            </div>
-        </div>
-        <div class="box">
-            <div>
-                <img src="http://ozi65v7vu.bkt.clouddn.com/2018/06/94709201806111729407610.jpg" alt="">
-            </div>
+        @endforeach
+        <div class="button">
+            <a href="/gang/admin_index" class="">进入管理</a>
         </div>
     </div>
 </div>

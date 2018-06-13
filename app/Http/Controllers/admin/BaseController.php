@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\admin;
 
 
+use App\Exceptions\ParameterException;
 use App\Http\Controllers\Controller;
 use App\Http\Model\ActionDataModel;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ class BaseController extends Controller
     //构造方法
     public function __construct()
     {
+
+        $this->gangId = session('gangsId');
         $this->checkStaticFile();
         $this->beForeAction();
     }
@@ -107,9 +110,15 @@ class BaseController extends Controller
         return response()->json($data);
     }
 
-
-
-    //统一修改状态方法
+    public function checkGangId()
+    {
+        if( !$this->gangId )
+        {
+            throw new ParameterException([
+                'msg'=> '协会参数意外丢失，操作终止'
+            ]);
+        }
+    }
 
 
 

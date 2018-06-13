@@ -30,7 +30,7 @@ class LoginController extends BaseController
          */
         $phone = $request->phone;
         $password = $request->password;
-        session(['gangs_id'=> [1]]);
+        session(['gangs_id'=> [1,2]]);
         return $this->resultHandler('ok', true, ['aaa'=> session('gangs_id')]);
     }
 }

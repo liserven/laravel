@@ -45,12 +45,12 @@
         <form class="m-t" role="form" action="index.html" style="border-radius: 20px;">
             <h3>欢迎登录 圈子后台</h3>
             <div class="form-group">
-                <input type="email" class="form-control uname" placeholder="管理员手机" required="">
+                <input type="text" class="form-control uname" id="phone" placeholder="管理员手机" required="">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control pword" placeholder="密码" required="">
+                <input type="password" class="form-control pword" id="password" placeholder="密码" required="">
             </div>
-            <button type="button" class="btn btn-primary block full-width m-b">登 录</button>
+            <button type="button" class="btn btn-primary block full-width m-b" id="login-btn"> 登 录</button>
 
             <div class="sk-spinner sk-spinner-wave login-ing" style="display: none;">
                 <div class="sk-rect1"></div>
@@ -70,31 +70,16 @@
 <script src="/static/hplus/js/jquery.min.js?v=2.1.4"></script>
 <script src="/static/hplus/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/static/hplus/js/plugins/toastr/toastr.min.js"></script>
+<script src="/Js/{{$action_name['mName']}}/{{strtolower($action_name['cName'])}}/{{strtolower($action_name['aName'])}}.js?v={{time()}}"></script>
 
-
-<script>
-    toastr.options = {
-        closeButton: true,
-        debug: false,
-        progressBar: true,
-        positionClass: "toast-top-right",
-        onclick: null,
-        showDuration: "3000",
-        hideDuration: "1000",
-        timeOut: "2000",
-        extendedTimeOut: "1000",
-        showEasing: "swing",
-        hideEasing: "linear",
-        showMethod: "fadeIn",
-        hideMethod: "fadeOut"
-    };
-
-    $("button").click(function () {
-        toastr.warning("你有新消息了!");
-        $(".login-ing").show();
-    });
-</script>
+    <script>
+        var _token = '{{csrf_token()}}';
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': _token
+            }
+        });
+    </script>
 </body>
-
 </html>
 

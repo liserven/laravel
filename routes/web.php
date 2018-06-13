@@ -14,7 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin/login', 'Auth\LoginController@showLoginForm');
+Route::get('/admin/login/index', 'admin\LoginController@index');
+Route::get('/admin/login/login', 'admin\LoginController@login');
 
 //后台首页
 Route::get('admin/index', 'admin\IndexController@index');
@@ -47,10 +48,18 @@ Route::post('admin/role/editStatus','admin\RoleController@editStatus');
 Route::post('admin/role/doDel','admin\RoleController@doDel');
 
 
-Route::prefix('gang')->group(function (){
-    Route::get('login/index', 'gang\LoginController@index');
-    Route::get('login/login', 'gang\LoginController@login');
-    Route::get('index/gangsList', 'gang\IndexController@gangsList');
+
+//公会管理后台操作路由
+Route::get('gang/login/index', 'gang\LoginController@index');
+Route::get('gang/login/login', 'gang\LoginController@login');
+Route::get('gang/index/gangsList', 'gang\IndexController@gangsList');
+Route::get('gang/admin_index', 'gang\IndexController@index');
+Route::get('gang/welcome', 'admin\IndexController@welcome');
+
+//此中路由有中间件
+Route::middleware(['checkGangId'])->prefix('gang')->group(function (){
+    Route::get('admin_home', 'gang\IndexController@home');
+
 });
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckGangId;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -59,6 +60,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'demo' => \App\Http\Middleware\Demo::class,
         'IdMust' => \App\Http\Middleware\IdMust::class,
+        'checkGangId'=>CheckGangId::class,
+
 
     ];
 }
