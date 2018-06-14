@@ -7,6 +7,8 @@
 layui.define(['form', 'layer','laydate','upload'], function (exports) { 
 
             
+    var $ = layui.jquery;
+
 
             //逻辑代码写在这里
 });

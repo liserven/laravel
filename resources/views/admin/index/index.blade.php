@@ -21,8 +21,8 @@
                             <span><img alt="image" class="img-circle" src="/static/hplus/img/profile_small.jpg"/></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                               <span class="block m-t-xs"><strong class="font-bold">{{ $member->md_name }}</strong></span>
+                                <span class="text-muted text-xs block">{{ $member->is_super == 1 ? '超级管理员' : '管理员' }}<b class="caret"></b></span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -35,7 +35,7 @@
                                 <li><a class="J_menuItem" href="mailbox.html">信箱</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
+                                <li><a href="javascript:;" url="/admin/login/index" class="exit">安全退出</a>
                                 </li>
                             </ul>
                         </div>
@@ -515,4 +515,32 @@
         <!--mini聊天窗口结束-->
     </div>
 @endsection
+
+@section('script')
+    <script>
+
+        var _token = '{{csrf_token()}}';
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': _token
+            }
+        });
+        $('.exit').click(function () {
+            var url = '/admin/exit';
+
+            $.post(url , {}, function (result) {
+                if( result.bol ){
+                    toastr.success('已安全退出....请登陆');
+                    setTimeout(function () {
+                        window.location.href = '/admin/login/index';
+                    }, 1000);
+                }else{
+                    toastr.error(result.msg);
+                }
+            });
+        });
+
+    </script>
+    @endsection
+
 

@@ -74,6 +74,11 @@ layui.define(['layer', 'laydate', 'form','custom'], function (exports) {
         window.location.reload();
     });
 
+
+    //退出方法
+
+
+
     //添加页面弹出
 
 

@@ -32,6 +32,7 @@ return array(
     'App\\Http\\Controllers\\gang\\LoginController' => $baseDir . '/app/Http/Controllers/gang/LoginController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\CheckGangId' => $baseDir . '/app/Http/Middleware/CheckGangId.php',
+    'App\\Http\\Middleware\\CheckLogin' => $baseDir . '/app/Http/Middleware/CheckLogin.php',
     'App\\Http\\Middleware\\Demo' => $baseDir . '/app/Http/Middleware/Demo.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\IdMust' => $baseDir . '/app/Http/Middleware/IdMust.php',

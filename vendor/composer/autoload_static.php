@@ -342,6 +342,7 @@ class ComposerStaticInitc148466a20336dbd804f7fd29a1a3bd2
         'App\\Http\\Controllers\\gang\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/gang/LoginController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\CheckGangId' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckGangId.php',
+        'App\\Http\\Middleware\\CheckLogin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckLogin.php',
         'App\\Http\\Middleware\\Demo' => __DIR__ . '/../..' . '/app/Http/Middleware/Demo.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\IdMust' => __DIR__ . '/../..' . '/app/Http/Middleware/IdMust.php',

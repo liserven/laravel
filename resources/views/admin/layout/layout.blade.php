@@ -23,32 +23,32 @@
 
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
+
+
     <![endif]-->
     @yield('link')
-
-</head>
-    <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    @yield('content')
 
 
     <link rel="shortcut icon" href="favicon.ico"> <link href="/static/hplus/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="/static/hplus/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="/static/hplus/css/animate.css" rel="stylesheet">
     <link href="/static/hplus/css/style.css?v=4.1.0" rel="stylesheet">
-
+</head>
+    <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    @yield('content')
     <!-- 全局js -->
     <script src="/static/hplus/js/jquery.min.js?v=2.1.4"></script>
     <script src="/static/hplus/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="/static/hplus/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="/static/hplus/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/static/hplus/js/plugins/layer/layer.min.js"></script>
+    <script src="/static/hplus/js/plugins/toastr/toastr.min.js"></script>
 
     <!-- 自定义js -->
     <script src="/static/hplus/js/hplus.js?v=4.1.0"></script>
     <script type="text/javascript" src="/static/hplus/js/contabs.js"></script>
 
+
     <!-- 第三方插件 -->
-    <script src="js/plugins/pace/pace.min.js"></script>
     @yield('script')
     </body>
     @yield('footer')

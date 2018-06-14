@@ -19,6 +19,9 @@ $('#login-btn').click(function(){
         if( result.bol )
         {
             toastr.success('登录成功');
+            setTimeout(function () {
+                window.location.href = '/admin/index';
+            }, 2000);
         }else{
             toastr.error(result.msg);
         }

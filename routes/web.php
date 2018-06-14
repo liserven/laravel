@@ -15,29 +15,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/admin/login/index', 'admin\LoginController@index');
-Route::get('/admin/login/login', 'admin\LoginController@login');
+Route::post('/admin/login/login', 'admin\LoginController@login');
+Route::post('/admin/exit', 'admin\LoginController@exit');
+
+
+
+Route::middleware(['checkLogin'])->prefix('admin')->group(function (){
+    Route::get('index', 'admin\IndexController@index');
+    Route::post('member/doDel', 'admin\MemberController@doDel');
 
 //后台首页
-Route::get('admin/index', 'admin\IndexController@index');
-Route::get('admin/welcome', 'admin\IndexController@welcome');
+    Route::get('welcome', 'admin\IndexController@welcome');
 
 //管理员列表
-Route::get('admin/member/tolist', 'admin\MemberController@toList');
-Route::any('admin/member/doAdd', 'admin\MemberController@doAdd');
-Route::get('admin/member/doEdit', 'admin\MemberController@doEdit');
-Route::post('admin/member/editStatus','admin\MemberController@editStatus');
+    Route::get('member/tolist', 'admin\MemberController@toList');
+    Route::any('member/doAdd', 'admin\MemberController@doAdd');
+    Route::get('member/doEdit', 'admin\MemberController@doEdit');
+    Route::post('member/editStatus','admin\MemberController@editStatus');
 
-Route::prefix('admin')->group(function (){
-    Route::post('member/doDel', 'admin\MemberController@doDel');
+//行为列表
+    Route::get('action/tolist', 'admin\ActionController@toList');
+    Route::any('action/doAdd', 'admin\ActionController@doAdd');
+    Route::post('action/editOrder','admin\ActionController@editOrder');
+    Route::post('action/editStatus','admin\ActionController@editStatus');
 });
 
 
 
-//行为列表
-Route::get('admin/action/tolist', 'admin\ActionController@toList');
-Route::any('admin/action/doAdd', 'admin\ActionController@doAdd');
-Route::post('admin/action/editOrder','admin\ActionController@editOrder');
-Route::post('admin/action/editStatus','admin\ActionController@editStatus');
 
 
 //角色管理

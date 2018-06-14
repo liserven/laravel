@@ -19,13 +19,16 @@ use Illuminate\Support\Facades\View;
 class BaseController extends Controller
 {
     //只有在工会管理登录才有用。 其他时候不用这个变量
-    protected $gangId;
+    protected $user;
 
     //构造方法
     public function __construct()
     {
 
         $this->gangId = session('gangsId');
+        $memberData = cache('memberData');
+        $this->user = $memberData;
+        View::share('member', $memberData);
         $this->checkStaticFile();
         $this->beForeAction();
     }

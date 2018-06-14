@@ -41,7 +41,7 @@
 <div class="middle-box text-center loginscreen  animated fadeInDown signinpanel">
     <div>
 
-
+        <input type="hidden" value="{{ session('is_login') }}" id="is_login">
         <form class="m-t" role="form" action="index.html" style="border-radius: 20px;">
             <h3>欢迎登录 圈子后台</h3>
             <div class="form-group">
